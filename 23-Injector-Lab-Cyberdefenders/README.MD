@@ -279,7 +279,6 @@ if (isset($_REQUEST["upload"])){
 }
 ```
 
-![CyberChef-decoded PHP uploader payload](screenshots/17.png)
 
 **Answer:** `4.1.0`
 
