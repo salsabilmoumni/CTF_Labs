@@ -240,6 +240,7 @@ First, listed running processes in the memory dump to find the web server proces
 ```powershell
 python .\vol.py -f <path>\memdump.mem windows.pslist.PsList
 ```
+![Strings output showing command injection payload](screenshots/15.png)
 
 This identifies `httpd.exe` (PID 2768, parent `xampp-control.e`) as the relevant web server process.
 
@@ -258,7 +259,7 @@ Searching the extracted strings for `hacker` with surrounding context reveals th
 ip=192.168.56.102 %26%26 net+localgroup+"Remote+Desktop+Users"+hacker+/add&submit=submit
 ```
 
-![Strings output showing command injection payload](screenshots/15.png)
+
 
 **Answer:** `192.168.56.102`
 
