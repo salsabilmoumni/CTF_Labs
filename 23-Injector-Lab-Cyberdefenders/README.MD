@@ -244,7 +244,7 @@ python .\vol.py -f <path>\memdump.mem windows.pslist.PsList
 
 This identifies `httpd.exe` (PID 2768, parent `xampp-control.e`) as the relevant web server process.
 
-![PsList showing httpd.exe PID 2768](screenshots/14.png)
+
 
 Dumped that process's memory and extracted strings from it:
 
@@ -255,9 +255,7 @@ python .\vol.py -f <path>\memdump.mem -o . windows.memmap --pid 2768 --dump
 
 Searching the extracted strings for `hacker` with surrounding context reveals the raw POST body of the command injection request, which embeds the source IP as part of the injected `net localgroup` command:
 
-```
-ip=192.168.56.102 %26%26 net+localgroup+"Remote+Desktop+Users"+hacker+/add&submit=submit
-```
+![PsList showing httpd.exe PID 2768](screenshots/14.png)
 
 
 
