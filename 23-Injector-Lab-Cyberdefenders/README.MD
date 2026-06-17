@@ -293,28 +293,4 @@ if (isset($_REQUEST["upload"])){
 6. **Defense Evasion** — The attacker modifies the Windows Firewall (`netsh firewall set service type=remotedesktop mode=enable scope=subnet`) to permit inbound RDP traffic for the new account.
 7. **Persistence / C2 Channel** — With RDP access enabled and a local account in hand, the attacker establishes a durable remote foothold on the host independent of the web application layer.
 
----
 
-## Key Artifacts & IOCs
-
-| Type | Value |
-|---|---|
-| Hostname | `WIN-L0ZZQ76PMUF` |
-| Timezone | `UTC-7` (Pacific Standard Time) |
-| OS Build | `6001` (Windows Server 2008 Standard) |
-| Attacker source IP | `192.168.56.102` |
-| Malicious user-agent | `sqlmap/1.0-dev-nongit-20150902` |
-| Created account | `hacker` |
-| Account creation time | `2015-09-02 09:05:06 UTC` |
-| Webshell MD5 | `5594112b531660654429f8639322218b` |
-| Webshell path | `xampp\htdocs\DVWA\hackable\uploads\webshell.php` |
-| Persistence technique | `T1136.001` – Create Local Account |
-
----
-
-## Lessons / Takeaways
-
-- Never expose intentionally vulnerable training applications like DVWA on internet-facing or shared infrastructure — every module is a live exploit by design.
-- Apache's `access.log` alone reconstructed the entire intrusion timeline (XSS → SQLi → LFI → webshell → command injection); ensure web server logging is enabled and retained.
-- Local account creation combined with group membership changes (`Remote Desktop Users`) is a low-noise, high-impact persistence technique — monitor `net localgroup` and SAM hive changes for this pattern.
-- Memory forensics (Volatility 3 + string extraction) recovered the raw HTTP POST body of an attack that wasn't fully visible in the access log alone, underscoring the value of capturing memory during incident response, not just disk.
